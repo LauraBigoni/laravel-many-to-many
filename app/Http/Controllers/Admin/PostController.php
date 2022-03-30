@@ -50,7 +50,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd($request->all());
         $request->validate([
             'title' => 'required|string|unique:posts|max:50|min:5',
             'content' => 'required|string|min:5',
@@ -73,6 +73,7 @@ class PostController extends Controller
 
         $post->fill($data);
         $post->slug = Str::slug($request->title, '-');
+
         $post->user_id = Auth::id();
 
         if (array_key_exists('is_published', $data)) {
@@ -80,6 +81,10 @@ class PostController extends Controller
         }
 
         $post->save();
+
+        if (array_key_exists('tags', $data)) {
+            $post->tags()->attach($data['tags']);
+        }
 
         return redirect()->route('admin.posts.show', $post->id)->with('message', "$post->title aggiunto con successo!")->with('type', 'success');
     }
@@ -125,7 +130,8 @@ class PostController extends Controller
             'title' => ['required', 'string', Rule::unique('posts')->ignore($post->id), 'max:50', 'min:5'],
             'content' => 'required|string|min:5',
             'image' => 'nullable|url',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
         ], [
             'required' => 'Il campo :attribute è obbligatorio.',
             'content.min' => 'Contenuto troppo corto.',
@@ -135,7 +141,6 @@ class PostController extends Controller
             'title.unique' => "$request->title esiste già.",
             'category_id.exists' => 'Categoria non valida.',
             'tags.exists' => 'Non hai inserito un tag corretto.',
-            'tags' => 'nullable|exists:tags,id'
         ]);
 
         $data = $request->all();

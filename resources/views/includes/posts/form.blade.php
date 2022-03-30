@@ -92,8 +92,10 @@
             <div class="col-12 d-flex flex-wrap">
                 @foreach ($tags as $tag)
                     <div class="form-check mr-3">
-                        <input class="form-check-input" type="checkbox" value="{{$tag->id}}" id="tag-{{$tag->id}}" name="tags[]">
-                        <label class="form-check-label" for="tag-{{$tag->id}}">{{$tag->label}}</label>
+
+                        <input class="form-check-input" type="checkbox" value="{{ $tag->id }}"
+                            id="tag-{{ $tag->id }}" name="tags[]" @if (in_array($tag->id, old('tags') ?? [])) checked @endif >
+                        <label class="form-check-label" for="tag-{{ $tag->id }}">{{ $tag->label }}</label>
                     </div>
                 @endforeach
             </div>

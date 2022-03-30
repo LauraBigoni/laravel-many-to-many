@@ -29,22 +29,29 @@
                         </span>
                     @else
                         -
-                    @endif <br>
+                    @endif
+                    <h4 class="pt-4">Tags:</h4>
+                    <p>
+                        @foreach ($post->tags as $tag)
+                            {{ $tag->label }}
+                        @endforeach
+                    </p>
                     <span>Creato il: {{ $post->created_at }}</span> <br>
                     <span> Ultimo aggiornamento: {{ $post->updated_at }}</span>
                 </div>
+                <div class="d-flex mt-auto">
+                    <a class="btn btn-sm btn-dark ml-auto mr-2" href="{{ route('admin.posts.edit', $post->id) }}"><i
+                            class="text-white fa-solid fa-pen-to-square"></i></a>
 
-                <a class="btn btn-sm btn-dark ml-auto mr-2" href="{{ route('admin.posts.edit', $post->id) }}"><i
-                        class="text-white fa-solid fa-pen-to-square"></i></a>
+                    <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST" class="delete-form"
+                        data-name="{{ $post->title }}">
+                        @csrf
+                        @method('DELETE')
 
-                <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST" class="delete-form"
-                    data-name="{{ $post->title }}">
-                    @csrf
-                    @method('DELETE')
-
-                    <button class="fw-bold btn btn-sm btn-dark" type="submit"><i
-                            class="text-white fa-solid fa-trash"></i></button>
-                </form>
+                        <button class="fw-bold btn btn-sm btn-dark" type="submit"><i
+                                class="text-white fa-solid fa-trash"></i></button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
