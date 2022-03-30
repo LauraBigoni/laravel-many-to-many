@@ -37,7 +37,7 @@ class PostController extends Controller
     public function create()
     {
         $post = new Post();
-        $tags = Tag::all();
+        $tags = Tag::orderBy('label', 'ASC')->get();
         $categories = Category::all();
         return view('admin.posts.create', compact('post', 'categories', 'tags'));
     }
@@ -50,6 +50,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $request->validate([
             'title' => 'required|string|unique:posts|max:50|min:5',
             'content' => 'required|string|min:5',
