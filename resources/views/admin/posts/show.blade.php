@@ -34,6 +34,9 @@
                     <p>
                         @foreach ($post->tags as $tag)
                             {{ $tag->label }}
+                            @if (!$loop->last)
+                                ,
+                            @endif
                         @endforeach
                     </p>
                     <span>Creato il: {{ $post->created_at }}</span> <br>
