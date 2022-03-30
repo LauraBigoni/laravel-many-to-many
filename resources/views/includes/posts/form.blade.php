@@ -89,15 +89,22 @@
                     <label class="form-check-label" for="is-published">Pubblica</label>
                 </div>
             </div>
-            <div class="col-12 d-flex flex-wrap">
-                @foreach ($tags as $tag)
-                    <div class="form-check mr-3">
-
-                        <input class="form-check-input" type="checkbox" value="{{ $tag->id }}"
-                            id="tag-{{ $tag->id }}" name="tags[]" @if (in_array($tag->id, old('tags') ?? [])) checked @endif >
-                        <label class="form-check-label" for="tag-{{ $tag->id }}">{{ $tag->label }}</label>
+            <div class="col-12">
+                <div class=" d-flex flex-wrap @error('tags') is-invalid @enderror">
+                    @foreach ($tags as $tag)
+                        <div class="form-check mr-3">
+                            <input class="form-check-input" type="checkbox" value="{{ $tag->id }}"
+                                id="tag-{{ $tag->id }}" name="tags[]"
+                                @if (in_array($tag->id, old('tags', $post_tags_ids ?? []))) checked @endif>
+                            <label class="form-check-label" for="tag-{{ $tag->id }}">{{ $tag->label }}</label>
+                        </div>
+                    @endforeach
+                </div>
+                @error('tags')
+                    <div class="invalid-feedback">
+                        {{ $message }}
                     </div>
-                @endforeach
+                @enderror
             </div>
             <div class="d-flex justify-content-end align-items-center ml-auto pt-3">
                 <button type="reset" class="btn btn-sm btn-info mr-2">Reset <i

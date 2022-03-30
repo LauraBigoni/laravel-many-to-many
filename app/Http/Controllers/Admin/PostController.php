@@ -112,9 +112,14 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $users = User::all();
-        $tags = Tag::all();
+        $tags = Tag::orderBy('label', 'ASC')->get();
+
+        // creo una variabile dove prendo tutti i tag che sono nel post
+        // con pluck recupero gli id e lo trasformo in array perchè il form si aspetta un array tags[]
+        $post_tags_ids = $post->tags->pluck('id')->toArray();
+
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories', 'users', 'tags'));
+        return view('admin.posts.edit', compact('tags', 'post', 'categories', 'users', 'post_tags_ids'));
     }
 
     /**
@@ -150,6 +155,10 @@ class PostController extends Controller
         $data['slug'] = Str::slug($request->title, '-');
         $post->update($data);
 
+        // devo fare in modo che in update salvi i tag cambiati
+        if (!array_key_exists('tags', $data)) $post->tags()->detach();
+        else $post->tags()->sync($data['tags']);
+        
         return redirect()->route('admin.posts.show', $post->id)->with('message', "$post->title aggiornato con successo!")->with('type', 'success');
     }
 
