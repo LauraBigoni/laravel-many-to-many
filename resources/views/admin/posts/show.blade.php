@@ -21,28 +21,28 @@
                     <p> {{ $post->content }} </p>
                 </div>
             </div>
-            <div class="col-12 d-flex flex-row justify-content-between align-items-center pt-5">
-                <div>
+            <div class="col-12 d-flex flex-row justify-content-between align-items-center pt-5 ">
+                <div class="flex-grow-1">
                     @if (isset($post->category))
-                        <span class="badge badge-pill badge-{{ $post->category->color }}">
+                        <p class="badge badge-pill badge-{{ $post->category->color }}">
                             {{ $post->category->label }}
-                        </span>
+                        </p>
                     @else
                         -
                     @endif
-                    <h4 class="pt-4">Tags:</h4>
-                    <p>
-                        @foreach ($post->tags as $tag)
-                            {{ $tag->label }}
-                            @if (!$loop->last)
-                                ,
-                            @endif
-                        @endforeach
-                    </p>
+                    <br>
+                    <h4 class="pt-4 mb-4">Tags:</h4>
+                    <div class=" d-flex flex-wrap flex-row">
+                        @forelse ($post->tags as $tag)
+                            <p class="bagde rounded py-1 px-2 mx-2 text-center"
+                                style="background-color: {{ $tag->color }}">{{ $tag->label }}</p>
+                        @empty <p>Nessun tag</p>
+                        @endforelse
+                    </div>
                     <span>Creato il: {{ $post->created_at }}</span> <br>
                     <span> Ultimo aggiornamento: {{ $post->updated_at }}</span>
                 </div>
-                <div class="d-flex mt-auto">
+                <div class="d-flex mt-auto flex-shrink-1">
                     <a class="btn btn-sm btn-dark ml-auto mr-2" href="{{ route('admin.posts.edit', $post->id) }}"><i
                             class="text-white fa-solid fa-pen-to-square"></i></a>
 

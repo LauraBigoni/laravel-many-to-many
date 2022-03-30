@@ -22,9 +22,9 @@
                             <th scope="col">#</th>
                             <th scope="col">Publish</th>
                             <th scope="col">Category</th>
+                            <th scope="col">Tags</th>
                             <th scope="col">Title</th>
                             <th scope="col">Autore</th>
-                            <th scope="col">Created at</th>
                             <th scope="col">Updated at</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -52,9 +52,9 @@
                                         -
                                     @endif
                                 </td>
+                                
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->author->name }}</td>
-                                <td>{{ $post->created_at }}</td>
                                 <td>{{ $post->updated_at }}</td>
                                 <td class="d-flex align-items-center justify-content-start">
                                     <a class="btn btn-sm btn-dark mr-2"
