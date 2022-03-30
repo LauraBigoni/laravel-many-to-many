@@ -19,7 +19,7 @@ class TagSeeder extends Seeder
 
         foreach ($tag_labels as $tag_label) {
             $tag = new Tag();
-            $tag->name = $tag_label;
+            $tag->label = $tag_label;
             $tag->color = $faker->hexColor();
             $tag->save();
         }
