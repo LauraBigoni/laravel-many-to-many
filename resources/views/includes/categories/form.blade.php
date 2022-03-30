@@ -40,10 +40,18 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col-6">
-                <label for="color">Colore:</label>
-                <input type="text" class="form-control @error('color') is-invalid @enderror" id="color" name="color"
-                    value="{{ old('color', $category->color) }}" required>
+            <div class="form-group col-4">
+                <label for="color">Categoria:</label>
+                <select class="custom-select" id="color" name="color" @error('color') is-invalid @enderror>
+                    <option value="danger" @if (old('color', $category->color) === 'danger') selected @endif> Rosso </option>
+                    <option value="success" @if (old('color', $category->color) === 'success') selected @endif> Verde </option>
+                    <option value="info" @if (old('color', $category->color) === 'info') selected @endif> Azzurro </option>
+                    <option value="warning" @if (old('color', $category->color) === 'warning') selected @endif> Giallo </option>
+                    <option value="primary" @if (old('color', $category->color) === 'primary') selected @endif> Blu </option>
+                    <option value="light" @if (old('color', $category->color) === 'light') selected @endif> Bianco </option>
+                    <option value="secondary" @if (old('color', $category->color) === 'secondary') selected @endif> Grigio </option>
+                    <option value="dark" @if (old('color', $category->color) === 'dark') selected @endif> Nero </option>
+                </select>
                 @error('color')
                     <div class="invalid-feedback">
                         {{ $message }}

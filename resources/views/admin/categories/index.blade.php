@@ -41,6 +41,7 @@
                                         -
                                     @endif
                                 </td>
+                                <td>{{ $category->created_at }}</td>
                                 <td class="d-flex align-items-center justify-content-center">
                                     <a class="btn btn-sm btn-dark mr-2"
                                         href="{{ route('admin.categories.show', $category->id) }}"><i

@@ -14,7 +14,7 @@
                 </header>
                 <div class="add-posts d-flex justify-content-end mb-4">
                     <a class="btn btn-sm btn-info" href="{{ route('admin.posts.create') }}"><i
-                        class="fa-solid fa-plus"></span></i></a>
+                            class="fa-solid fa-plus"></span></i></a>
                 </div>
                 <table class="table">
                     <thead>
@@ -44,15 +44,16 @@
                                 </td>
                                 <td>
                                     @if (isset($post->category))
-                                        <span class="badge badge-pill badge-{{ $post->category->color }}">
-                                            {{ $post->category->label }}
-                                        </span>
+                                        <a href="{{ route('admin.categories.show', $post->category->id) }}"><span
+                                                class="badge badge-pill badge-{{ $post->category->color }}">
+                                                {{ $post->category->label }}
+                                            </span></a>
                                     @else
                                         -
                                     @endif
                                 </td>
                                 <td>{{ $post->title }}</td>
-                                <td>{{ $post->user->name }}</td>
+                                <td>{{ $post->author->name }}</td>
                                 <td>{{ $post->created_at }}</td>
                                 <td>{{ $post->updated_at }}</td>
                                 <td class="d-flex align-items-center justify-content-start">

@@ -18,11 +18,11 @@ class Post extends Model
         return $this->belongsTo('App\Models\Category');
     }
 
-    public function user()
+    public function author()
     {
         /** 
          * Serve per fare $post->category
          */
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
 }

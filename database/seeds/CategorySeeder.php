@@ -18,7 +18,7 @@ class CategorySeeder extends Seeder
             ['label' => 'Buisness', 'color' => 'info'],
             ['label' => 'Tecnology', 'color' => 'warning'],
             ['label' => 'Fashion', 'color' => 'primary'],
-            ['label' => 'Hobbies', 'color' => 'danger'],
+            ['label' => 'Hobbies', 'color' => 'light'],
             ['label' => 'Cooking', 'color' => 'secondary'],
             ['label' => 'Cosmetics', 'color' => 'dark'],
         ];
