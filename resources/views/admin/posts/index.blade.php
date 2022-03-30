@@ -53,14 +53,12 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if (isset($post->tags))
-                                        <a href="{{ route('admin.categories.show', $post->category->id) }}"><span
-                                                class="badge badge-pill badge-{{ $post->category->color }}">
-                                                nessuno
-                                            </span></a>
-                                    @else
-                                        -
-                                    @endif
+                                    @forelse ($post->tags as $tag)
+                                        <span style="background-color: {{ $tag->color }}" class="badge badge-pill text-white">
+                                            {{ $tag->label }} </span>
+                                    @empty
+                                        <span>-</span>
+                                    @endforelse
                                 </td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->author->name }}</td>
