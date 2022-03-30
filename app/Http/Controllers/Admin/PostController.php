@@ -50,12 +50,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+
         $request->validate([
             'title' => 'required|string|unique:posts|max:50|min:5',
             'content' => 'required|string|min:5',
             'image' => 'nullable|url',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
         ], [
             'required' => 'Il campo :attribute è obbligatorio.',
             'content.min' => 'Contenuto troppo corto.',
@@ -63,7 +64,8 @@ class PostController extends Controller
             'title.max' => 'Titolo troppo lungo.',
             'url' => 'Non hai inserito un url corretto.',
             'title.unique' => "$request->title esiste già.",
-            'category_id' => 'Categoria non valida.'
+            'category_id.exists' => 'Categoria non valida.',
+            'tags.exists' => 'Non hai inserito un tag corretto.'
         ]);
 
         $data = $request->all();
@@ -131,7 +133,9 @@ class PostController extends Controller
             'title.max' => 'Titolo troppo lungo.',
             'url' => 'Non hai inserito un url corretto.',
             'title.unique' => "$request->title esiste già.",
-            'category_id' => 'Categoria non valida.'
+            'category_id.exists' => 'Categoria non valida.',
+            'tags.exists' => 'Non hai inserito un tag corretto.',
+            'tags' => 'nullable|exists:tags,id'
         ]);
 
         $data = $request->all();
