@@ -42,7 +42,8 @@
             </div>
             <div class="form-group col-4">
                 <label for="category">Categoria:</label>
-                <select class="custom-select" id="category" name="category_id"  @error('category_id') is-invalid @enderror>
+                <select class="custom-select" id="category" name="category_id"
+                    @error('category_id') is-invalid @enderror>
                     <option value="">-</option>
                     @foreach ($categories as $category)
                         <option @if (old('category_id', $post->category_id) == $category->id) selected @endif value="{{ $category->id }}">
@@ -80,13 +81,21 @@
                 <img src="{{ old('image', $post->image) ??'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw_HeSzHfBorKS4muw4IIeVvvRgnhyO8Gn8w&usqp=CAU' }}"
                     width="50px" class="img-fluid rounded" alt="image placeholder" id="preview">
             </div>
-            
+
             <div class="col-6">
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="is-published" name="is_published"
                         {{ old('is_published', $post->is_published) ? 'checked' : '' }}>
-                    <label class="form-check-label btn btn-sm btn-light" for="is-published">Pubblica</label>
+                    <label class="form-check-label" for="is-published">Pubblica</label>
                 </div>
+            </div>
+            <div class="col-12 d-flex flex-wrap">
+                @foreach ($tags as $tag)
+                    <div class="form-check mr-3">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="defaultCheck">
+                        <label class="form-check-label" for="defaultCheck1">{{$tag->label}}</label>
+                    </div>
+                @endforeach
             </div>
             <div class="d-flex justify-content-end align-items-center ml-auto pt-3">
                 <button type="reset" class="btn btn-sm btn-info mr-2">Reset <i

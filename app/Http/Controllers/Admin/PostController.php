@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Str;
@@ -22,10 +23,10 @@ class PostController extends Controller
     public function index(Post $post)
     {
         $users = User::all();
+        $tags = Tag::all();
         $categories = Category::all();
-
         $posts = Post::orderBy('updated_at', 'DESC')->paginate(10);
-        return view('admin.posts.index', compact('posts', 'categories', 'users',));
+        return view('admin.posts.index', compact('posts', 'categories', 'users', 'tags'));
     }
 
     /**
@@ -36,8 +37,9 @@ class PostController extends Controller
     public function create()
     {
         $post = new Post();
+        $tags = Tag::all();
         $categories = Category::all();
-        return view('admin.posts.create', compact('post', 'categories'));
+        return view('admin.posts.create', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -87,9 +89,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $categories = Category::all();
+        $tags = Tag::all();
         $users = User::all();
-        return view('admin.posts.show', compact('post', 'categories', 'users'));
+        $categories = Category::all();
+        return view('admin.posts.show', compact('post', 'categories', 'users', 'tags'));
     }
 
     /**
@@ -100,9 +103,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $categories = Category::all();
         $users = User::all();
-        return view('admin.posts.edit', compact('post', 'categories', 'users'));
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('admin.posts.edit', compact('post', 'categories', 'users', 'tags'));
     }
 
     /**
