@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -66,6 +68,7 @@ class PostController extends Controller
 
         $post->fill($data);
         $post->slug = Str::slug($request->title, '-');
+        $post->user_id = Auth::id();
 
         if (array_key_exists('is_published', $data)) {
             $post['is_published'] = true;
