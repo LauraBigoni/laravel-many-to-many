@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
+use App\Models\Tag;
+use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
@@ -128,5 +132,19 @@ class CategoryController extends Controller
         // TODO: chiedere a marco
 
         return redirect()->route('admin.categories.index')->with('message', "Tutte le categorie sono state eliminate con successo!")->with('type', 'danger');
+    }
+
+    /**
+     * Remove all resources from storage.
+     *
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyAll()
+    {
+        $num_cat = Category::count();
+        DB::table('categories')->delete();
+
+        return redirect()->route('admin.categories.index')->with('message', "$num_cat categorie eliminate con successo!")->with('type', 'success');
     }
 }

@@ -68,14 +68,14 @@
                         @endforelse
                     </tbody>
                 </table>
-                <div class="add-categories d-flex justify-content-end mb-4">
-                    {{-- <form action="{{ route('admin.categories.truncate') }}" method="POST" class="delete-form"
-                        data-name="tutte le categorie">
+                <div class="delete-categories d-flex justify-content-end mb-4">
+                    <form action="{{ route('admin.categories.destroyAll') }}" method="POST"
+                        class="delete-form delete-all" data-name="tutte le categorie">
                         @csrf
                         @method('DELETE')
                         <button class="fw-bold btn btn-sm btn-danger" type="submit"><i
                                 class="text-white fa-solid fa-trash"></i> Elimina tutto</button>
-                    </form> --}}
+                    </form>
                 </div>
             </div>
         </div>

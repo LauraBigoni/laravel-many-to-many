@@ -23,7 +23,9 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
         Route::patch('/posts/{post}/toggle', 'PostController@toggle')->name('posts.toggle');
-        Route::patch('/categories/truncate', 'CategoryController@truncate')->name('categories.truncate');
+        Route::patch('/posts', 'PostController@destroyAll')->name('posts.destroyAll');
+        Route::patch('/categories', 'CategoryController@destroyAll')->name('categories.destroyAll');
+
         Route::resource('posts', 'PostController');
         Route::resource('categories', 'CategoryController');
     });

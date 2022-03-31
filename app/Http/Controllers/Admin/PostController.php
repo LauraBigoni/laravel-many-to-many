@@ -9,6 +9,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -158,7 +159,7 @@ class PostController extends Controller
         // devo fare in modo che in update salvi i tag cambiati
         if (!array_key_exists('tags', $data)) $post->tags()->detach();
         else $post->tags()->sync($data['tags']);
-        
+
         return redirect()->route('admin.posts.show', $post->id)->with('message', "$post->title aggiornato con successo!")->with('type', 'success');
     }
 
@@ -172,7 +173,7 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return redirect()->route('admin.posts.index')->with('message', "$post->title eliminato con successo!")->with('type', 'danger');
+        return redirect()->route('admin.posts.index')->with('message', "$post->title eliminato con successo!")->with('type', 'success');
     }
 
     /**
@@ -188,5 +189,19 @@ class PostController extends Controller
         $post->save();
 
         return redirect()->route('admin.posts.index')->with('message', "$post->title $published con successo!")->with('type', 'success');
+    }
+
+    /**
+     * Remove all resources from storage.
+     *
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyAll(Request $request)
+    {
+        $num_posts = Post::count();
+        DB::table('posts')->delete();
+
+        return redirect()->route('admin.posts.index')->with('message', "$num_posts post eliminati con successo!")->with('type', 'success');
     }
 }

@@ -91,6 +91,15 @@
                         @endforelse
                     </tbody>
                 </table>
+                <div class="delete-categories d-flex justify-content-end mb-4">
+                    <form action="{{ route('admin.posts.destroyAll') }}" method="POST" class="delete-form delete-all"
+                        data-name="tutti i post">
+                        @csrf
+                        @method('DELETE')
+                        <button class="fw-bold btn btn-sm btn-danger" type="submit"><i
+                                class="text-white fa-solid fa-trash"></i> Elimina tutto</button>
+                    </form>
+                </div>
                 @if ($posts->hasPages())
                     <div class="d-flex justify-content-end mt-4">
                         {{ $posts->links() }}

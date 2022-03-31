@@ -9,7 +9,7 @@
                 @endif
             </header>
             @if ($errors->any())
-                <div class="alert alert-{{ session('type') ?? 'info' }} text-center" role="alert">
+                <div class="alert alert-{{ session('type') ?? 'danger' }} text-center" role="alert">
                     <ul class="list-unstyled">
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
