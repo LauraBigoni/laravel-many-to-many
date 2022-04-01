@@ -34,9 +34,10 @@
                                 <td>{{ $category->label }}</td>
                                 <td>
                                     @if (isset($category))
-                                        <p class="badge display-1 badge-pill badge-{{ $category->color }}">
+                                        <a href="{{ route('admin.categories.show', $category->id) }}"
+                                            class="badge display-1 badge-pill badge-{{ $category->color }}">
                                             <span class="h6">{{ $category->color }}</span>
-                                        </p>
+                                        </a>
                                     @else
                                         -
                                     @endif
