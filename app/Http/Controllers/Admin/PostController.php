@@ -197,7 +197,7 @@ class PostController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function destroyAll(Request $request)
+    public function destroyAll()
     {
         $num_posts = Post::count();
         DB::table('posts')->delete();

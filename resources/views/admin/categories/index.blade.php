@@ -70,7 +70,7 @@
                     </tbody>
                 </table>
                 <div class="delete-categories d-flex justify-content-end my-4">
-                    <form action="{{ route('admin.categories.destroyAll') }}" method="POST"
+                    <form action="{{ route('admin.categories.destroy_all') }}" method="POST"
                         class="delete-form delete-all" data-name="tutte le categorie">
                         @csrf
                         @method('DELETE')
