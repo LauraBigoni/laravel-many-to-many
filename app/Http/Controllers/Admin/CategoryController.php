@@ -147,4 +147,15 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.categories.index')->with('message', "$num_cat categorie eliminate con successo!")->with('type', 'success');
     }
+
+    /**
+     * shows a list of related posts for the given category
+     *
+     * @param Category $category
+     * @return \Illuminate\Http\Response
+     */
+    public function posts(Category $category)
+    {
+        return view('admin.categories.posts', compact('category'));
+    }
 }

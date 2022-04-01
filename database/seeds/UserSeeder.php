@@ -22,5 +22,12 @@ class UserSeeder extends Seeder
             $user->password = bcrypt($faker->password());
             $user->save();
         }
+
+        // ! solo per non registrarmi ogni volta che refresho 
+        $admin = new User();
+        $admin->name = 'Laura';
+        $admin->email = 'lau@bool.it';
+        $admin->password = bcrypt('password');
+        $admin->save();
     }
 }

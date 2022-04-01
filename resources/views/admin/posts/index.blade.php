@@ -44,7 +44,7 @@
                                 </td>
                                 <td>
                                     @if (isset($post->category))
-                                        <a href="{{ route('admin.categories.show', $post->category->id) }}"><span
+                                        <a href="{{ route('admin.categories.posts', $post->category_id) }}"><span
                                                 class="badge badge-pill badge-{{ $post->category->color }}">
                                                 {{ $post->category->label }}
                                             </span></a>
