@@ -23,11 +23,11 @@
             </div>
             @if ($post->exists)
                 <form action="{{ route('admin.posts.update', $post->id) }}" method="POST"
-                    class="col-12 d-flex flex-wrap align-items-center" novalidate>
+                    class="col-12 d-flex flex-wrap align-items-center" enctype="multipart/form-data" novalidate>
                     @method('PUT')
                 @else
                     <form action="{{ route('admin.posts.store') }}" method="POST"
-                        class="col-12 d-flex flex-wrap align-items-center" novalidate>
+                        class="col-12 d-flex flex-wrap align-items-center" enctype="multipart/form-data" novalidate>
             @endif
             @csrf
             <div class="form-group col-8">
@@ -67,21 +67,20 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col-11">
+            <div class="form-group col-8">
                 <label for="image">Immagine:</label>
-                <input type="url" class="form-control @error('image') is-invalid @enderror" id="image" name="image"
-                    value="{{ old('image', $post->image) }}">
+                <input type="file" class="form-control-file @error('image') is-invalid @enderror" id="image"
+                    name="image">
                 @error('image')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-            <div class="col-1">
+            <div class="col-2 ml-auto">
                 <img src="{{ old('image', $post->image) ??'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw_HeSzHfBorKS4muw4IIeVvvRgnhyO8Gn8w&usqp=CAU' }}"
-                    width="50px" class="img-fluid rounded" alt="image placeholder" id="preview">
+                    width="150" class="img-fluid rounded" alt="image placeholder" id="preview">
             </div>
-
             <div class="col-6">
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="is-published" name="is_published"

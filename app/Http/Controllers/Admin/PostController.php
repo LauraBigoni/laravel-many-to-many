@@ -12,7 +12,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -55,7 +55,9 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|unique:posts|max:50|min:5',
             'content' => 'required|string|min:5',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image',
+            //al posto di image posso usare 
+            //mimes:jpeg,png ecc.. per specificare le estensioni
             'category_id' => 'nullable|exists:categories,id',
             'tags' => 'nullable|exists:tags,id'
         ], [
@@ -63,7 +65,7 @@ class PostController extends Controller
             'content.min' => 'Contenuto troppo corto.',
             'title.min' => 'Titolo troppo corto.',
             'title.max' => 'Titolo troppo lungo.',
-            'url' => 'Non hai inserito un url corretto.',
+            'image' => 'Il formato dell\'immagine non è corretto.',
             'title.unique' => "$request->title esiste già.",
             'category_id.exists' => 'Categoria non valida.',
             'tags.exists' => 'Non hai inserito un tag corretto.'
@@ -72,6 +74,13 @@ class PostController extends Controller
         $data = $request->all();
         $post = new Post();
 
+        // Uso questo metodo se ho già il fillable, se non avessi image fillable dovrei fare in un altro modo.
+        if (array_key_exists('image', $data)) {
+            $img_url = Storage::put('post_images', $data['image']);
+            // Ora posso fillare img_url perchè l'ho recuperato e il suo path è in public
+            $data['image'] = $img_url;
+        }
+        
         $post->fill($data);
         $post->slug = Str::slug($request->title, '-');
 
@@ -135,7 +144,7 @@ class PostController extends Controller
         $request->validate([
             'title' => ['required', 'string', Rule::unique('posts')->ignore($post->id), 'max:50', 'min:5'],
             'content' => 'required|string|min:5',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image',
             'category_id' => 'nullable|exists:categories,id',
             'tags' => 'nullable|exists:tags,id'
         ], [
@@ -143,7 +152,7 @@ class PostController extends Controller
             'content.min' => 'Contenuto troppo corto.',
             'title.min' => 'Titolo troppo corto.',
             'title.max' => 'Titolo troppo lungo.',
-            'url' => 'Non hai inserito un url corretto.',
+            'image' => 'il formato dell\'immagine non è corretto.',
             'title.unique' => "$request->title esiste già.",
             'category_id.exists' => 'Categoria non valida.',
             'tags.exists' => 'Non hai inserito un tag corretto.',

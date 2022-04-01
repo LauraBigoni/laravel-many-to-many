@@ -20,16 +20,17 @@
                 @endforeach
             </div>
         </div>
-        <div class="delete-categories d-flex justify-content-end my-4">
-            <form action="{{ route('admin.posts.destroy_all') }}" method="POST" class="delete-form delete-all"
-                data-name="tutte le categorie">
-                @csrf
-                @method('DELETE')
-                <input type="hidden" name="category_id" value="{{ $category->id }}">
-                <button class="fw-bold btn btn-sm btn-danger" type="submit"><i class="text-white fa-solid fa-trash"></i>
-                    Elimina tutto</button>
-            </form>
+        <div class="row">
+            <div class="col-12 delete-categories d-flex justify-content-end my-4">
+                <form action="{{ route('admin.posts.destroy_all') }}" method="POST" class="delete-form delete-all"
+                    data-name="tutte le categorie">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="category_id" value="{{ $category->id }}">
+                    <button class="fw-bold btn btn-sm btn-danger" type="submit"><i class="text-white fa-solid fa-trash"></i>
+                        Elimina tutto</button>
+                </form>
+            </div>
         </div>
-    </div>
     </div>
 @endsection
