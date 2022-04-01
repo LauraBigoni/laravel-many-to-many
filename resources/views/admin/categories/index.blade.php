@@ -17,7 +17,7 @@
                     <a class="btn btn-sm btn-info" href="{{ route('admin.categories.create') }}"><i
                             class="fa-solid fa-plus"></span></i></a>
                 </div>
-                <table class="table col-12 m-auto">
+                <table class="table">
                     <thead>
                         <tr class="">
                             <th scope="col">#</th>
@@ -69,7 +69,7 @@
                         @endforelse
                     </tbody>
                 </table>
-                <div class="delete-categories d-flex justify-content-end mb-4">
+                <div class="delete-categories d-flex justify-content-end my-4">
                     <form action="{{ route('admin.categories.destroyAll') }}" method="POST"
                         class="delete-form delete-all" data-name="tutte le categorie">
                         @csrf

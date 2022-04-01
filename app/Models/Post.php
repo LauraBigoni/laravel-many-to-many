@@ -36,4 +36,9 @@ class Post extends Model
     {
         return Carbon::create($this->$date)->format($format);
     }
+
+    public function getAbstract($length = 200)
+    {
+        return substr($this->content, 0, $length) . '...';
+    }
 }

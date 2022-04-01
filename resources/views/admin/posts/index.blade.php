@@ -91,7 +91,7 @@
                         @endforelse
                     </tbody>
                 </table>
-                <div class="delete-categories d-flex justify-content-end mb-4">
+                <div class="delete-categories d-flex justify-content-end">
                     <form action="{{ route('admin.posts.destroyAll') }}" method="POST" class="delete-form delete-all"
                         data-name="tutti i post">
                         @csrf
