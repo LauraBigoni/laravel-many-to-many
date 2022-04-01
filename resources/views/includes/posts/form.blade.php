@@ -111,7 +111,7 @@
                 @enderror
             </div>
             <div class="d-flex justify-content-end align-items-center ml-auto pt-3">
-                <button type="reset" class="btn btn-sm btn-info mr-2">Reset <i
+                <button type="reset" class="btn btn-sm btn-info mr-2" id="reset">Reset <i
                         class="fa-solid fa-arrow-rotate-left"></i></button>
                 <button type="submit" class="btn btn-sm btn-info">Salva <i class="fa-solid fa-floppy-disk"></i></button>
             </div>
