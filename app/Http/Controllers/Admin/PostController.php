@@ -197,8 +197,12 @@ class PostController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function destroyAll()
+    public function destroyAll(Request $request)
     {
+        $request->validate([
+            'category_id' => 'nullable|exists:category_id'
+        ]);
+
         $num_posts = Post::count();
         DB::table('posts')->delete();
 

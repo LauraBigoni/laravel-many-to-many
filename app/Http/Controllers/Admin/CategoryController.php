@@ -140,8 +140,12 @@ class CategoryController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function destroyAll()
+    public function destroyAll(Request $request)
     {
+        $request->validate([
+            'category_id' => 'nullable|exists:category_id'
+        ]);
+
         $num_cat = Category::count();
         DB::table('categories')->delete();
 
