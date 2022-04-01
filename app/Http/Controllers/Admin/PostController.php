@@ -80,7 +80,7 @@ class PostController extends Controller
             // Ora posso fillare img_url perchè l'ho recuperato e il suo path è in public
             $data['image'] = $img_url;
         }
-        
+
         $post->fill($data);
         $post->slug = Str::slug($request->title, '-');
 
@@ -163,6 +163,15 @@ class PostController extends Controller
         $data['is_published'] = array_key_exists('is_published', $data) ? 1 : 0;
 
         $data['slug'] = Str::slug($request->title, '-');
+
+        if (array_key_exists('image', $data)) {
+            // controllo prima che ci sia l'immagine
+            if ($post->image) Storage::delete($post->image);
+
+            $img_url = Storage::put('post_images', $data['image']);
+            $data['image'] = $img_url;
+        }
+
         $post->update($data);
 
         // devo fare in modo che in update salvi i tag cambiati
@@ -180,6 +189,13 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        // prima cancello tutte le relazioni
+        if (count($post->tags)) $post->tags()->delete();
+
+        //elimino tutte le immagini
+        if ($post->image) Storage::delete($post->image);
+
+        // e alla fine elimino
         $post->delete();
 
         return redirect()->route('admin.posts.index')->with('message', "$post->title eliminato con successo!")->with('type', 'success');

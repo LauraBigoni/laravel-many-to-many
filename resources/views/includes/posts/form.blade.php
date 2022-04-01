@@ -78,8 +78,13 @@
                 @enderror
             </div>
             <div class="col-2 ml-auto">
-                <img src="{{ old('image', $post->image) ??'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw_HeSzHfBorKS4muw4IIeVvvRgnhyO8Gn8w&usqp=CAU' }}"
-                    width="150" class="img-fluid rounded" alt="image placeholder" id="preview">
+                @if ($post->image)
+                    <img src="{{ asset("storage/$post->image") }}" width="150" class="img-fluid rounded"
+                        alt="{{ $post->slug }}" id="preview">
+                @else
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw_HeSzHfBorKS4muw4IIeVvvRgnhyO8Gn8w&usqp=CAU"
+                        width="150" class="img-fluid rounded" alt="preview" id="preview">
+                @endif
             </div>
             <div class="col-6">
                 <div class="form-group form-check">
