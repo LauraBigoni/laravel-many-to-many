@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -21,7 +22,7 @@ class Post extends Model
     public function author()
     {
         /** 
-         * Serve per fare $post->category
+         * Serve per fare $post->user
          */
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
@@ -29,5 +30,10 @@ class Post extends Model
     public function tags()
     {
         return $this->belongsToMany('App\Models\Tag');
+    }
+
+    public function getUpdatedAt($date = 'd-m-Y H:i:s')
+    {
+        return Carbon::create($this->updated_at)->format($date);
     }
 }

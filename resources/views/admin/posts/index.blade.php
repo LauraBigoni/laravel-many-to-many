@@ -63,7 +63,7 @@
                                 </td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->author->name }}</td>
-                                <td>{{ $post->updated_at }}</td>
+                                <td>{{ $post->getUpdatedAt() }}</td>
                                 <td class="d-flex align-items-center justify-content-start">
                                     <a class="btn btn-sm btn-dark mr-2"
                                         href="{{ route('admin.posts.show', $post->id) }}"><i
