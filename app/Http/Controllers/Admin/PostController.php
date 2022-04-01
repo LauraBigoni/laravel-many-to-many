@@ -200,11 +200,12 @@ class PostController extends Controller
     public function destroyAll(Request $request)
     {
         $request->validate([
-            'category_id' => 'nullable|exists:category_id'
+            'category_id' => 'nullable|exists:categories,id'
         ]);
 
-        $num_posts = Post::count();
-        DB::table('posts')->delete();
+        $posts = $request->category_id ? Post::where('category_id', $request->category_id) : Post::all();
+        $num_posts = count($posts);
+        $posts->delete();
 
         return redirect()->route('admin.posts.index')->with('message', "$num_posts post eliminati con successo!")->with('type', 'success');
     }

@@ -143,7 +143,7 @@ class CategoryController extends Controller
     public function destroyAll(Request $request)
     {
         $request->validate([
-            'category_id' => 'nullable|exists:category_id'
+            'category_id' => 'nullable|exists:categories,id'
         ]);
 
         $num_cat = Category::count();

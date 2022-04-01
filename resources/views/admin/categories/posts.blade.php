@@ -14,12 +14,21 @@
 
                 @foreach ($category->posts as $post)
                     <div class="col-12">
-                        <a class="text-decoration-none"
-                            href="{{ route('admin.posts.show', $post->id) }}">	
+                        <a class="text-decoration-none" href="{{ route('admin.posts.show', $post->id) }}">
                             &#903; {{ $post->title }}</a>
                     </div>
                 @endforeach
             </div>
+        </div>
+        <div class="delete-categories d-flex justify-content-end my-4">
+            <form action="{{ route('admin.posts.destroy_all') }}" method="POST" class="delete-form delete-all"
+                data-name="tutte le categorie">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" name="category_id" value="{{ $category->id }}">
+                <button class="fw-bold btn btn-sm btn-danger" type="submit"><i class="text-white fa-solid fa-trash"></i>
+                    Elimina tutto</button>
+            </form>
         </div>
     </div>
     </div>
