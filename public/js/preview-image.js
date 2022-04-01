@@ -22,6 +22,6 @@ imageInput.addEventListener('change', () => {
 });
 
 // Aggiungo un event listener al bottone reset per svuotare tutti i campi del form e quindi anche l'eventuale immagine caricata
-reset.addEventListener('click', (e) => {
+reset.addEventListener('click', () => {
     imagePreview.setAttribute('src', placeholder);
 });
