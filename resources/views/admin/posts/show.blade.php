@@ -39,8 +39,8 @@
                         @empty <p>Nessun tag</p>
                         @endforelse
                     </div>
-                    <span>Creato il: {{ $post->created_at }}</span> <br>
-                    <span> Ultimo aggiornamento: {{ $post->updated_at }}</span>
+                    <span>Creato il: {{ $post->getFormattedDate('created_at') }}</span> <br>
+                    <span> Ultimo aggiornamento: {{ $post->getFormattedDate('updated_at') }}</span>
                 </div>
                 <div class="d-flex mt-auto flex-shrink-1">
                     <a class="btn btn-sm btn-dark ml-auto mr-2" href="{{ route('admin.posts.edit', $post->id) }}"><i

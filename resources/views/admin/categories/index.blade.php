@@ -23,7 +23,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Nome</th>
                             <th scope="col">Colore</th>
-                            <th scope="col">Creato il</th>
+                            <th scope="col">Modificato il</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -41,7 +41,7 @@
                                         -
                                     @endif
                                 </td>
-                                <td>{{ $category->created_at }}</td>
+                                <td>{{ $category->getFormattedDate('updated_at') }}</td>
                                 <td class="d-flex align-items-center justify-content-center">
                                     <a class="btn btn-sm btn-dark mr-2"
                                         href="{{ route('admin.categories.show', $category->id) }}"><i

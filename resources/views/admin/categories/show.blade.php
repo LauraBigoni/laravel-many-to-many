@@ -27,15 +27,15 @@
             </div>
             <div class="col-12 d-flex flex-row justify-content-between align-items-center pt-5">
                 <div>
-                    <span>Creato il: {{ $category->created_at }}</span> <br>
-                    <span> Ultimo aggiornamento: {{ $category->updated_at }}</span>
+                    <span>Creato il: {{ $category->getFormattedDate('created_at') }}</span> <br>
+                    <span> Ultimo aggiornamento: {{ $category->getFormattedDate('updated_at') }}</span>
                 </div>
 
                 <a class="btn btn-sm btn-dark ml-auto mr-2" href="{{ route('admin.categories.edit', $category->id) }}"><i
                         class="text-white fa-solid fa-pen-to-square"></i></a>
 
-                <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST"
-                    class="delete-form" data-name="{{ $category->title }}">
+                <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" class="delete-form"
+                    data-name="{{ $category->title }}">
                     @csrf
                     @method('DELETE')
 
