@@ -29,6 +29,7 @@ Route::middleware('auth')
 
         Route::resource('posts', 'PostController');
         Route::resource('categories', 'CategoryController');
+        Route::resource('tags', 'TagController');
     });
 
 // * {any} Un parametro che può anche non esserci e se c'è ".*" può essere qualunque cosa. In questo modo qualunque rotta deve andare su Vue e andrà gestita in frontend.

@@ -87,9 +87,9 @@
                         </li>
 
                         <li class="nav-link">
-                            <a href="{{ url('/') }}" class="nav-link">
-                                <i class="fa-solid fa-chart-column"></i>
-                                <span class="text nav-text">Analytics</span>
+                            <a href="{{ route('admin.tags.index') }}" class="nav-link">
+                                <i class="fa-solid fa-tags"></i>
+                                <span class="text nav-text">Tags</span>
                             </a>
                         </li>
                     </ul>
