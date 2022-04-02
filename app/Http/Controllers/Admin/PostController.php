@@ -101,7 +101,7 @@ class PostController extends Controller
 
         // * MAIL DI CONFERMA
         // Istanzio la mia email
-        $mail = new NotificationMail();
+        $mail = new NotificationMail($post);
         // Dico all'helper Mail di mandarla con un destinatario
         Mail::to($user->email)->send($mail);
 

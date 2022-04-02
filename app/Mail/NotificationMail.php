@@ -11,14 +11,17 @@ class NotificationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    // Dichiaro il post privato
+    private $post;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($post)
     {
-        //
+        // Uso il costruttore per passare il post alla mail di notifica
+        $this->post = $post;
     }
 
     /**
@@ -28,6 +31,7 @@ class NotificationMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.posts.notification');
+        // Array associativo con le quadre perchè ho THIS post, e non direttamente il post
+        return $this->view('mails.posts.notification', ['post' => $this->post]);
     }
 }
