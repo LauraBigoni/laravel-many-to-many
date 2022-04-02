@@ -21,12 +21,12 @@ class PostSeeder extends Seeder
         // Pluck the category IDs and transform them into array format
         $category_ids = Category::pluck('id')->toArray();
         $user_ids = User::pluck('id')->toArray();
+        $tag_ids = Tag::all('id');
 
         for ($i = 0; $i < 50; $i++) {
             $post = new Post();
             $post->user_id = Arr::random($user_ids);
             $post->category_id = Arr::random($category_ids);
-            // $post->tag_id = $post->Tag::class->rand(0, 4);
             $post->title = $faker->sentence(2);
             $post->content = $faker->paragraphs(3, true);
             // $post->image = $faker->imageUrl(360, 360);
@@ -34,5 +34,11 @@ class PostSeeder extends Seeder
             $post->slug = Str::slug($post->title, '-');
             $post->save();
         }
+
+        $post->each(function (App\Models\Post $p) use ($tag_ids) {
+            $p->tags()->attach(
+                $tag_ids->random(rand(1, 8))->pluck('id')->toArray()
+            );
+        });
     }
 }
