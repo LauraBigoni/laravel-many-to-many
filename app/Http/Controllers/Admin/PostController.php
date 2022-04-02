@@ -8,7 +8,7 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Mail\NotificationMail;
+use App\Mail\PostCreatedMail;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -99,11 +99,19 @@ class PostController extends Controller
             $post->tags()->attach($data['tags']);
         }
 
-        // * MAIL DI CONFERMA
+        // * MAIL DI CONFERMA ALL'AUTORE
         // Istanzio la mia email
-        $mail = new NotificationMail($post);
+        $mail = new PostCreatedMail($post);
         // Dico all'helper Mail di mandarla con un destinatario
         Mail::to($user->email)->send($mail);
+
+        // * MANDARE L'EMAIL A TUTTI GLI UTENTI ALLA CREAZIONE DI UN NUOVO POST
+        // if ($post->is_published) {
+        //     $user_mails = User::pluck('email')->toArray();
+        //     foreach ($user_mails as $recipient) {
+        //         Mail::to($recipient)->send($mail);
+        //     }
+        // }
 
         return redirect()->route('admin.posts.show', $post->id)->with('message', "$post->title aggiunto con successo!")->with('type', 'success');
     }
