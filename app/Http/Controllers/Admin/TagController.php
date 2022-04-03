@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class TagController extends Controller
 {
@@ -31,7 +32,7 @@ class TagController extends Controller
     public function create()
     {
         $tag = new Tag();
-        return view('admin.tags.create', compact('tags'));
+        return view('admin.tags.create', compact('tag'));
     }
 
     /**
@@ -44,12 +45,13 @@ class TagController extends Controller
     {
         $request->validate([
             'label' => 'required|string|unique:tags|min:2|max:20',
-            'color' => 'string|nullable|min:3'
+            'color' => 'unique:tags'
         ], [
             'required' => 'Il campo :attribute è obbligatorio.',
             'label.unique' => "$request->label esiste già.",
             'min' => 'Nome troppo corto.',
-            'max' => 'Nome troppo lungo.'
+            'max' => 'Nome troppo lungo.',
+            'color.unique' => 'Il colore esiste già'
         ]);
 
         $data = $request->all();
@@ -92,12 +94,14 @@ class TagController extends Controller
     {
         $request->validate([
             'label' => 'required|string|unique:tags|min:2|max:20',
-            'color' => 'string|nullable|min:3'
+            'color' => 'string|nullable|min:3',
+            'color' => 'unique:tags'
         ], [
             'required' => 'Il campo :attribute è obbligatorio.',
             'label.unique' => "$request->label esiste già.",
             'min' => 'Nome troppo corto.',
-            'max' => 'Nome troppo lungo.'
+            'max' => 'Nome troppo lungo.',
+            'color.unique' => 'Il colore esiste già'
         ]);
 
         $data = $request->all();
@@ -134,5 +138,16 @@ class TagController extends Controller
         DB::table('tags')->delete();
 
         return redirect()->route('admin.tags.index')->with('message', "$num_tag categorie eliminate con successo!")->with('type', 'success');
+    }
+
+    /**
+     * shows a list of related posts for the given category
+     *
+     * @param Tag $tag
+     * @return \Illuminate\Http\Response
+     */
+    public function posts(Tag $tag)
+    {
+        return view('admin.tags.posts', compact('tag'));
     }
 }

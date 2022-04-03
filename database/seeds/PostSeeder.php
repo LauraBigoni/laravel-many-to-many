@@ -37,7 +37,7 @@ class PostSeeder extends Seeder
 
         $post->each(function (App\Models\Post $p) use ($tag_ids) {
             $p->tags()->attach(
-                $tag_ids->random(rand(1, 8))->pluck('id')->toArray()
+                $tag_ids->random(rand(1, 4))->pluck('id')->toArray()
             );
         });
     }

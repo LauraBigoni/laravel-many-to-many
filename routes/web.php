@@ -25,7 +25,9 @@ Route::middleware('auth')
         Route::patch('/posts/{post}/toggle', 'PostController@toggle')->name('posts.toggle');
         Route::delete('/posts', 'PostController@destroyAll')->name('posts.destroy_all');
         Route::delete('/categories', 'CategoryController@destroyAll')->name('categories.destroy_all');
+        Route::delete('/tags', 'TagController@destroyAll')->name('tags.destroy_all');
         Route::get('/categories/{category}/posts', 'CategoryController@posts')->name('categories.posts');
+        Route::get('/tags/{tag}/posts', 'TagController@posts')->name('tags.posts');
 
         Route::resource('posts', 'PostController');
         Route::resource('categories', 'CategoryController');

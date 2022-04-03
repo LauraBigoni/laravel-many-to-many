@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <header>
-                    <h1 class="text-center">Categorie del blog</h1>
+                    <h1 class="text-center">Tags del blog</h1>
 
                     @if (session('message'))
                         <div class="container alert alert-{{ session('type') }} text-center" role="alert">
@@ -13,8 +13,8 @@
                         </div>
                     @endif
                 </header>
-                <div class="add-categories d-flex justify-content-end mb-4">
-                    <a class="btn btn-sm btn-info" href="{{ route('admin.categories.create') }}"><i
+                <div class="add-tags d-flex justify-content-end mb-4">
+                    <a class="btn btn-sm btn-info" href="{{ route('admin.tags.create') }}"><i
                             class="fa-solid fa-plus"></span></i></a>
                 </div>
                 <table class="table">
@@ -28,31 +28,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($categories as $category)
+                        @forelse ($tags as $tag)
                             <tr>
-                                <th scope="row">{{ $category->id }}</th>
-                                <td>{{ $category->label }}</td>
+                                <th scope="row">{{ $tag->id }}</th>
+                                <td>{{ $tag->label }}</td>
                                 <td>
-                                    @if (isset($category))
-                                        <a href="{{ route('admin.categories.show', $category->id) }}"
-                                            class="badge badge-pill badge-{{ $category->color }}">
-                                            <span>{{ $category->color }}</span>
-                                        </a>
-                                    @else
-                                        -
-                                    @endif
+                                    <a href="{{ route('admin.tags.show', $tag->id) }}"><span
+                                            style="background-color: {{ $tag->color }}"
+                                            class="badge badge-pill text-white">
+                                            {{ $tag->color }} </span></a>
                                 </td>
-                                <td>{{ $category->getFormattedDate('updated_at') }}</td>
+                                <td>{{ $tag->getFormattedDate('updated_at') }}</td>
                                 <td class="d-flex align-items-center justify-content-center">
-                                    <a class="btn btn-sm btn-dark mr-2"
-                                        href="{{ route('admin.categories.show', $category->id) }}"><i
+                                    <a class="btn btn-sm btn-dark mr-2" href="{{ route('admin.tags.show', $tag->id) }}"><i
                                             class="fa-regular fa-file-lines"></i></a>
                                     <a class="btn btn-sm btn-dark mr-2"
-                                        href="{{ route('admin.categories.edit', $category->id) }}"><i
+                                        href="{{ route('admin.tags.edit', $tag->id) }}"><i
                                             class="text-white fa-solid fa-pen-to-square"></i></a>
 
-                                    <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST"
-                                        class="delete-form" data-name="{{ $category->title }}">
+                                    <form action="{{ route('admin.tags.destroy', $tag->id) }}" method="POST"
+                                        class="delete-form" data-name="{{ $tag->label }}">
                                         @csrf
                                         @method('DELETE')
                                         <button class="fw-bold btn btn-sm btn-dark" type="submit"><i
@@ -63,15 +58,15 @@
                         @empty
                             <tr>
                                 <td colspan="5" class="text-center">
-                                    <h3>Non ci sono categorie</h3>
+                                    <h3>Non ci sono Tags</h3>
                                 </td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
-                <div class="delete-categories d-flex justify-content-end my-4">
-                    <form action="{{ route('admin.categories.destroy_all') }}" method="POST"
-                        class="delete-form delete-all" data-name="tutte le categorie">
+                <div class="delete-tags d-flex justify-content-end my-4">
+                    <form action="{{ route('admin.tags.destroy_all') }}" method="POST" class="delete-form delete-all"
+                        data-name="tutte le categorie">
                         @csrf
                         @method('DELETE')
                         <button class="fw-bold btn btn-sm btn-danger" type="submit"><i

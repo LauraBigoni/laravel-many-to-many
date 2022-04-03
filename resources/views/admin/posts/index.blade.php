@@ -54,9 +54,10 @@
                                 </td>
                                 <td>
                                     @forelse ($post->tags as $tag)
-                                        <span style="background-color: {{ $tag->color }}"
-                                            class="badge badge-pill text-white">
-                                            {{ $tag->label }} </span>
+                                        <a href="{{ route('admin.tags.posts', $tag->id) }}"><span
+                                                style="background-color: {{ $tag->color }}"
+                                                class="badge badge-pill text-white">
+                                                {{ $tag->label }} </span></a>
                                     @empty
                                         <span>-</span>
                                     @endforelse
