@@ -245,9 +245,9 @@ class PostController extends Controller
             'category_id' => 'nullable|exists:categories,id'
         ]);
 
-        $posts = $request->category_id ? Post::where('category_id', $request->category_id) : Post::all();
+        $posts = $request->category_id ? Post::where('category_id' && 'tag_id', $request->category_id && $request->tag_id) : Post::all();
         $num_posts = count($posts);
-        $posts->delete();
+        $posts->each->delete();
 
         return redirect()->route('admin.posts.index')->with('message', "$num_posts post eliminati con successo!")->with('type', 'success');
     }

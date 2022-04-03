@@ -66,7 +66,7 @@
                 </table>
                 <div class="delete-tags d-flex justify-content-end my-4">
                     <form action="{{ route('admin.tags.destroy_all') }}" method="POST" class="delete-form delete-all"
-                        data-name="tutte le categorie">
+                        data-name="tutti i tag">
                         @csrf
                         @method('DELETE')
                         <button class="fw-bold btn btn-sm btn-danger" type="submit"><i
