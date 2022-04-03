@@ -85,7 +85,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center">
+                                <td colspan="8" class="text-center">
                                     <h3>Non ci sono post</h3>
                                 </td>
                             </tr>
